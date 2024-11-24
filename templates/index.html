@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ant Colony Optimization TSP</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Algorytm mrówkowy ACO w problemie komiwojażera</h1>
+
+    <div class="main-container">
+      <div class="parameters">
+        <form method="POST">
+          <h2>Parametry</h2>
+
+          <div class="form-row">
+            <div>
+              <label for="num_ants">Liczba mrówek:</label>
+              <input
+                step="1"
+                min="1"
+                max="500"
+                type="number"
+                id="num_ants"
+                name="num_ants"
+                value="{{ num_ants }}"
+              /><br />
+            </div>
+
+            <div>
+              <label for="num_iterations">Liczba iteracji w pętli:</label>
+              <input
+                type="number"
+                step="1"
+                min="1"
+                max="1000"
+                id="num_iterations"
+                name="num_iterations"
+                value="{{ num_iterations }}"
+              /><br />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="alpha">Feromony (Alfa α):</label>
+              <input
+                type="number"
+                id="alpha"
+                name="alpha"
+                step="0.01"
+                min="0.10"
+                max="5.00"
+                value="{{ alpha }}"
+              /><br />
+            </div>
+            <div>
+              <label for="beta">Heurystyka (Beta β):</label>
+              <input
+                type="number"
+                step="0.01"
+                min="0.10"
+                max="5.00"
+                id="beta"
+                name="beta"
+                value="{{ beta }}"
+              /><br />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="evaporation_rate">Parowanie feromonów:</label>
+              <input
+                type="number"
+                step="0.01"
+                min="0.10"
+                max="1.00"
+                id="evaporation_rate"
+                name="evaporation_rate"
+                value="{{ evaporation_rate }}"
+              /><br />
+            </div>
+            <div>
+              <label for="Q">Feromony początkowe:</label>
+              <input
+                type="number"
+                step="1"
+                min="1"
+                max="500"
+                id="Q"
+                name="Q"
+                value="{{ Q }}"
+              /><br />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="tsp_file">Wybierz plik TSP:</label>
+              <select id="tsp_file" name="tsp_file">
+                <option value="att48" {% if request.form.get('tsp_file') == 'att48' %}selected{% endif %}>att48</option>
+              </select><br />
+            </div>
+          </div>
+
+          <input type="submit" value="Znajdź trasę" />
+        </form>
+      </div>
+
+      <div class="chart-card">
+        <h2>Najlepsza znaleziona trasa</h2>
+        {% if plot_div %} {{ plot_div|safe }} {% endif %}
+      </div>
+
+      <div class="history">
+        <h2>Historia iteracji</h2>
+        {% if iteration_distances %}
+        <ul>
+          {% for record in iteration_distances %}
+          <li>
+            Iteracja {{ record.iteration_number }}: Długość trasy {{ record.iteration_distance }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
