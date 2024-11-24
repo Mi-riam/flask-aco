@@ -38,7 +38,7 @@ input[type='submit'] {
   display: block;
   width: 100%;
   padding: 10px;
-  background: #4caf50;
+  background: #990d7f;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -47,7 +47,7 @@ input[type='submit'] {
   transition: background 0.3s;
 }
 input[type='submit']:hover {
-  background: #45a049;
+  background: #b51096;
 }
 
 h2 {

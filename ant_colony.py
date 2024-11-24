@@ -5,6 +5,7 @@ import io
 import base64
 import plotly.graph_objs as go
 from plotly.offline import plot
+import time
 
 class AntColony:
     def __init__(self, cities, num_ants, num_iterations, alpha=1, beta=2, evaporation_rate=0.5, Q=100):
@@ -19,6 +20,7 @@ class AntColony:
         self.num_cities = len(cities)
         self.pheromones = np.ones((self.num_cities, self.num_cities))
         self.best_path = None
+        self.total_time = 0.00
         self.iteration_distances = []
         self.best_distance = float('inf')
         self.start_city = random.randint(0, self.num_cities - 1)
@@ -40,6 +42,7 @@ class AntColony:
         return tij + 1 if tij < rij else tij
 
     def run(self):
+        start_time = time.time()
         for i in range(self.num_iterations):
             all_paths = []
             all_distances = []
@@ -58,6 +61,8 @@ class AntColony:
             "iteration_number": i + 1,
             "iteration_distance": self.best_distance
         })
+        end_time = time.time()  # Record the end time
+        self.total_time = round(end_time - start_time, 2)  # Calculate the total time taken
 
     def generate_path(self):
         path = [self.start_city]
@@ -138,7 +143,7 @@ class AntColony:
 
         # Adding layout details
         fig.update_layout(
-            title=f"Best path found with distance {self.best_distance}",
+            title=f"Best path found with distance {self.best_distance}, total time: {self.total_time}",
             xaxis_title="X",
             yaxis_title="Y",
             showlegend=True,
