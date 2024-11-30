@@ -138,7 +138,7 @@ class AntColony:
         ))
 
         fig.update_layout(
-            title=f"Best path found with distance {self.best_distance}, total time: {self.total_time}",
+            title=f"Najlepsza znaleziona trasa {self.best_distance}, czas wykonywania algorytmu: {self.total_time}",
             xaxis_title="X",
             yaxis_title="Y",
             showlegend=True,
