@@ -61,8 +61,8 @@ class AntColony:
             "iteration_number": i + 1,
             "iteration_distance": self.best_distance
         })
-        end_time = time.time()  # Record the end time
-        self.total_time = round(end_time - start_time, 2)  # Calculate the total time taken
+        end_time = time.time()  
+        self.total_time = round(end_time - start_time, 2)  # obliczenie czasu wykonywania algorytmu
 
     def generate_path(self):
         path = [self.start_city]
@@ -109,27 +109,23 @@ class AntColony:
     def plot_best_path(self):
         print(self.best_path)
 
-        # Extracting coordinates for the best path
         x_coords = [self.cities[city][0] for city in self.best_path]
         y_coords = [self.cities[city][1] for city in self.best_path]
 
-        # Creating a Plotly figure
         fig = go.Figure()
 
-        # Adding a scatter plot for the best path with larger markers and black lines
         fig.add_trace(go.Scatter(
             x=x_coords,
             y=y_coords,
             mode='markers+lines+text',
-            marker=dict(size=20, color='black'),  # Increased size of the dots
-            line=dict(color='blue', width=2),  # Black path lines
+            marker=dict(size=20, color='black'),  
+            line=dict(color='blue', width=2),  
             name='Best Path',
-            text=[str(index) for index in range(len(self.best_path))],  # Order numbers as text
-            textposition='middle center',  # Position text in the middle of the marker
-            textfont=dict(color='white')  # White color for the text
+            text=[str(index) for index in range(len(self.best_path))],  
+            textposition='middle center',  
+            textfont=dict(color='white')  
         ))
 
-        # Highlight the starting city
         start_city_x = self.cities[self.best_path[0]][0]
         start_city_y = self.cities[self.best_path[0]][1]
         
@@ -137,21 +133,19 @@ class AntColony:
             x=[start_city_x],
             y=[start_city_y],
             mode='markers',
-            marker=dict(size=25, color='red', symbol='circle'),  # Larger size for start city
+            marker=dict(size=25, color='red', symbol='circle'),  
             name='Start City'
         ))
 
-        # Adding layout details
         fig.update_layout(
             title=f"Best path found with distance {self.best_distance}, total time: {self.total_time}",
             xaxis_title="X",
             yaxis_title="Y",
             showlegend=True,
-            width=1200,  # Increase width
-            height=800  # Increase height
+            width=1200,  
+            height=800 
         )
 
-        # Generate HTML div for the Plotly figure
         plot_div = plot(fig, include_plotlyjs=False, output_type='div')
         
         return plot_div
