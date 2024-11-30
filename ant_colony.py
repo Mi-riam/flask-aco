@@ -120,7 +120,7 @@ class AntColony:
             mode='markers+lines+text',
             marker=dict(size=20, color='black'),  
             line=dict(color='blue', width=2),  
-            name='Best Path',
+            name='Najlepsza trasa',
             text=[str(index) for index in range(len(self.best_path))],  
             textposition='middle center',  
             textfont=dict(color='white')  
@@ -134,7 +134,7 @@ class AntColony:
             y=[start_city_y],
             mode='markers',
             marker=dict(size=25, color='red', symbol='circle'),  
-            name='Start City'
+            name='Miasto początkowe'
         ))
 
         fig.update_layout(
