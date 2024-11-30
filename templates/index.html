@@ -13,12 +13,12 @@
     />
   </head>
   <body>
-    <h1>Ant Colony Optimization for TSP</h1>
+    <h1>Algorytm mrówkowy ACO w problemie komiwojazera</h1>
 
     <div class="main-container">
       <div class="parameters">
         <form method="POST">
-          <h2>Parameters</h2>
+          <h2>Parametry</h2>
 
           <div class="form-row">
             <div>
@@ -104,7 +104,7 @@
 
           <div class="form-row">
             <div>
-              <label for="tsp_file">Select TSP File:</label>
+              <label for="tsp_file">Wybierz plik TSP:</label>
               <select id="tsp_file" name="tsp_file">
                 <option value="att48" {% if request.form.get('tsp_file') == 'att48' %}selected{% endif %}>att48</option>
                 <option value="berlin52" {% if request.form.get('tsp_file') == 'berlin52' %}selected{% endif %}>berlin52</option>
@@ -112,17 +112,17 @@
             </div>
           </div>
 
-          <input type="submit" value="Run Algorithm" />
+          <input type="submit" value="Znajdź trasę" />
         </form>
       </div>
 
       <div class="chart-card">
-        <h2>Best Path Found</h2>
+        <h2>Najlepsza znaleziona trasa</h2>
         {% if plot_div %} {{ plot_div|safe }} {% endif %}
       </div>
 
       <div class="history">
-        <h2>Iteration Distances History</h2>
+        <h2>Historia iteracji</h2>
         {% if iteration_distances %}
         <ul>
           {% for record in iteration_distances %}
